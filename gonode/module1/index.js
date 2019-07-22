@@ -8,11 +8,13 @@ const server = express();
 // route params = /test/1
 // body params = { "name": "Joseph" }
 
-// catches incoming requests on route '/test'
-server.get("/users/:id", (req, res) => {
-  const id = req.params.id;
+const users = ["Paulo", "Joseph", "Maria"];
 
-  return res.json({ message: `Searching for user ${id}...` });
+// catches incoming requests on route '/test'
+server.get("/users/:index", (req, res) => {
+  const { index } = req.params;
+
+  return res.json(users[index]);
 });
 
 // listens to requests on port 3000
