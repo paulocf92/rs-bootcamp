@@ -10,8 +10,9 @@ const server = express();
 
 // catches incoming requests on route '/test'
 server.get("/test", (req, res) => {
-  // returns json object containing a string
-  return res.json({ message: "Hello World" });
+  const nome = req.query.nome;
+
+  return res.json({ message: `Hello ${nome}` });
 });
 
 // listens to requests on port 3000
