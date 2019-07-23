@@ -22,7 +22,19 @@ server.use((req, res, next) => {
 
   // next ensures this middleware won't interrupt the request flow
   return next();
-})
+});
+
+// local middleware example
+function checkUserExists(req, res, next) {
+  // if name parameter isn't found on request body, throw bad request error
+  // with custom message
+  if (!req.body.name) {
+    return res.status(400).json({ error: "User name is required" });
+  }
+
+  // otherwise, proceed with request flow
+  return next();
+}
 
 // lists all users
 server.get("/users", (req, res) => {
@@ -37,7 +49,7 @@ server.get("/users/:index", (req, res) => {
 });
 
 // creates a single user
-server.post("/users", (req, res) => {
+server.post("/users", checkUserExists, (req, res) => {
   const { name } = req.body;
 
   users.push(name);
@@ -46,7 +58,7 @@ server.post("/users", (req, res) => {
 });
 
 // updates a single user
-server.put("/users/:index", (req, res) => {
+server.put("/users/:index", checkUserExists, (req, res) => {
   const { index } = req.params;
   const { name } = req.body;
 
