@@ -37,9 +37,15 @@ function checkUserExists(req, res, next) {
 }
 
 function checkUserInArray(req, res, next) {
-  if (!users[req.params.index]) {
+  const user = users[req.params.index];
+
+  if (!user) {
     return res.status(400).json({ error: "User does not exist" });
   }
+
+  // if passed validation, add another var to the request containing user
+  // this var can be used by subsequent middlewares or routes
+  req.user = user;
 
   return next();
 }
@@ -51,9 +57,8 @@ server.get("/users", (req, res) => {
 
 // lists a single user
 server.get("/users/:index", checkUserInArray, (req, res) => {
-  const { index } = req.params;
-
-  return res.json(users[index]);
+  // return user directly from request, added in checkUserInArray middleware
+  return res.json(req.user);
 });
 
 // creates a single user
