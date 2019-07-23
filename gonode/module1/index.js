@@ -36,13 +36,21 @@ function checkUserExists(req, res, next) {
   return next();
 }
 
+function checkUserInArray(req, res, next) {
+  if (!users[req.params.index]) {
+    return res.status(400).json({ error: "User does not exist" });
+  }
+
+  return next();
+}
+
 // lists all users
 server.get("/users", (req, res) => {
   return res.json(users);
 });
 
 // lists a single user
-server.get("/users/:index", (req, res) => {
+server.get("/users/:index", checkUserInArray, (req, res) => {
   const { index } = req.params;
 
   return res.json(users[index]);
@@ -58,7 +66,7 @@ server.post("/users", checkUserExists, (req, res) => {
 });
 
 // updates a single user
-server.put("/users/:index", checkUserExists, (req, res) => {
+server.put("/users/:index", checkUserInArray, checkUserExists, (req, res) => {
   const { index } = req.params;
   const { name } = req.body;
 
@@ -68,7 +76,7 @@ server.put("/users/:index", checkUserExists, (req, res) => {
 });
 
 // deletes a single user
-server.delete("/users/:index", (req, res) => {
+server.delete("/users/:index", checkUserInArray, (req, res) => {
   const { index } = req.params;
 
   users.splice(index, 1);
