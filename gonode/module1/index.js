@@ -15,6 +15,15 @@ server.use(express.json());
 
 const users = ["Paulo", "Joseph", "Maria"];
 
+// middleware example; intercepts a request and do something
+server.use((req, res, next) => {
+  // displaying method and url for this request
+  console.log(`Method: ${req.method}; URL: ${req.url}`);
+
+  // next ensures this middleware won't interrupt the request flow
+  return next();
+})
+
 // lists all users
 server.get("/users", (req, res) => {
   return res.json(users);
