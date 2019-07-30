@@ -13,6 +13,12 @@ class UserController {
 
     return res.json({ id, email, name, provider });
   }
+
+  async update(req, res) {
+    // req.userId now available from auth middleware
+
+    return res.json({ ok: true });
+  }
 }
 
 export default new UserController();
