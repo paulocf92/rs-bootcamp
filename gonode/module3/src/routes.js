@@ -22,6 +22,7 @@ routes.put('/users', UserController.update);
 
 routes.get('/providers', ProviderController.index);
 
+routes.get('/appointments', AppointmentController.index);
 routes.post('/appointments', AppointmentController.store);
 
 // passes upload (multer) middleware setting file parameter as 'file'
