@@ -58,6 +58,12 @@ class AppointmentController {
         .json({ error: 'You can only create appointments with providers' });
     }
 
+    if (provider_id === req.userId) {
+      return res
+        .status(400)
+        .json({ error: 'You cannot create appointments with yourself' });
+    }
+
     // parses date string to js date object, stripping minutes/seconds from time
     const hourStart = startOfHour(parseISO(date));
 
