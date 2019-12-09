@@ -1,4 +1,4 @@
-# GoNode - Module #1
+# Stage #2 - Module 2
 
 ## Description
 

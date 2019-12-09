@@ -1,4 +1,4 @@
-# GoNative - Module #1
+# Stage #3 - Module 7
 
 ## Description
 

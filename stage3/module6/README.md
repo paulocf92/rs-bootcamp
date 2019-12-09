@@ -1,4 +1,4 @@
-# GoReact - Module #2
+# Stage #3 - Module 6
 
 ## Description
 
