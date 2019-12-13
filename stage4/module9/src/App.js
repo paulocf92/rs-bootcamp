@@ -1,42 +1,27 @@
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import React from 'react';
+import { Router } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
+
+import './config/ReactotronConfig';
+
+import GlobalStyle from './styles/global';
+import Header from './components/Header/index';
+import Routes from './routes';
+
+import history from './services/history';
+import store from './store';
 
 function App() {
-  const [techs, setTech] = useState(['ReactJS', 'React Native']);
-  const [newTech, setNewTech] = useState('');
-
-  const handleAdd = useCallback(() => {
-    setTech([...techs, newTech]);
-    setNewTech('');
-  }, [newTech, techs]);
-
-  // Mimics componentDidMount to monitor first-time run
-  useEffect(() => {
-    const storageTechs = localStorage.getItem('techs');
-
-    if (storageTechs) {
-      setTech(JSON.parse(storageTechs));
-    }
-  }, []);
-
-  // Mimics componentDidUpdate to monitor state changes
-  useEffect(() => {
-    localStorage.setItem('techs', JSON.stringify(techs));
-  }, [techs]);
-
-  const techSize = useMemo(() => techs.length, [techs]);
-
   return (
-    <>
-      <ul>
-        {techs.map(tech => (
-          <li key={tech}>{tech}</li>
-        ))}
-      </ul>
-      <strong>Você tem {techSize} tecnologias.</strong>
-      <br />
-      <input value={newTech} onChange={e => setNewTech(e.target.value)} />
-      <button onClick={handleAdd}>Adicionar</button>
-    </>
+    <Provider store={store}>
+      <Router history={history}>
+        <Header />
+        <Routes />
+        <GlobalStyle />
+        <ToastContainer autoClose={3000} />
+      </Router>
+    </Provider>
   );
 }
 
