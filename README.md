@@ -18,5 +18,6 @@ This repo holds all code created for RocketSeat's Bootcamp.
 
 - Stage #4: Flux Architecture and React Hooks
   - [Module 8 - Flux Architecture](stage4/module8)
+  - [Module 9 - React Hooks](stage4/module9)
 
 Should you find any issues with the code, hit me up or send a pull request! :heart:
