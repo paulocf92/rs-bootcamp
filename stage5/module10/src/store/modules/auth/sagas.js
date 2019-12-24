@@ -22,6 +22,8 @@ export function* signIn({ payload }) {
       return;
     }
 
+    api.defaults.headers.Authorization = `Bearer ${token}`;
+
     yield put(signInSuccess(token, user));
 
     history.push('/dashboard');
@@ -49,7 +51,23 @@ export function* signUp({ payload }) {
   }
 }
 
+/**
+  Each time redux-persist reloads data, apply auth token to our api header's
+  authorization so that each request is successfully authenticated.
+  This is possible by listening to redux-persist's persist/REHYDRATE action.
+*/
+export function setToken({ payload }) {
+  if (!payload) return;
+
+  const { token } = payload.auth;
+
+  if (token) {
+    api.defaults.headers.Authorization = `Bearer ${token}`;
+  }
+}
+
 export default all([
+  takeLatest('persist/REHYDRATE', setToken),
   takeLatest('@auth/SIGN_IN_REQUEST', signIn),
   takeLatest('@auth/SIGN_UP_REQUEST', signUp),
 ]);
