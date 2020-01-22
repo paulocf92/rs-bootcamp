@@ -12,7 +12,7 @@ export function* updateProfile({ payload }) {
     const profile = {
       name,
       email,
-      ...(rest.oldPassord ? rest : {}),
+      ...(rest.oldPassword ? rest : {}),
     };
 
     const response = yield call(api.put, 'users', profile);
