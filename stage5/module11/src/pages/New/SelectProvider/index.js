@@ -15,16 +15,7 @@ export default function SelectProvider({ navigation }) {
     async function loadProviders() {
       const response = await api.get('providers');
 
-      const data = response.data.map(provider => ({
-        ...provider,
-        avatar: provider.avatar
-          ? {
-              url: provider.avatar.url.replace('localhost', '192.168.1.175'),
-            }
-          : null,
-      }));
-
-      setProviders(data);
+      setProviders(response.data);
     }
 
     loadProviders();

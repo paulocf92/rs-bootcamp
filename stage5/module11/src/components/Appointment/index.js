@@ -8,12 +8,6 @@ import PropTypes from 'prop-types';
 import { Container, Left, Avatar, Info, Name, Time } from './styles';
 
 export default function Appointment({ data, onCancel }) {
-  const avatarUrl = useMemo(() => {
-    return data.provider.avatar
-      ? data.provider.avatar.url.replace('localhost', '192.168.1.175')
-      : null;
-  }, [data.provider.avatar]);
-
   const dateParsed = useMemo(() => {
     return formatRelative(parseISO(data.date), new Date(), {
       locale: pt,
@@ -27,7 +21,7 @@ export default function Appointment({ data, onCancel }) {
         <Avatar
           source={{
             uri: data.provider.avatar
-              ? avatarUrl
+              ? data.provider.avatar.url
               : `https://api.adorable.io/avatars/50/${data.provider.name}`,
           }}
         />
