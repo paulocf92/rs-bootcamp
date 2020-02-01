@@ -22,7 +22,12 @@ This repo holds all code created for RocketSeat's Bootcamp.
   - [Module 9 - React Hooks](stage4/module9)
 
 - Stage #5: Diving deeper into ReactJS and React Native!
+
   - [Module 10 - GoBarber Webapp](stage5/module10)
   - [Module 11 - GoBarber Mobile](stage5/module11)
+
+- Stage #6: Testing and deploying in NodeJS!
+  - [Module 12 - Testing in NodeJS](stage6/module12)
+  - [Module 13 - Deploying in NodeJS](stage6/module13)
 
 Should you find any issues with the code, hit me up or send a pull request! :heart:
